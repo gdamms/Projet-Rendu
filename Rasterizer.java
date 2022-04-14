@@ -210,7 +210,9 @@ public class Rasterizer {
                     double beta = barycentric.get(1);
                     double gamma = barycentric.get(2);
 
-                    if (barycentric.get(0) > 0 && barycentric.get(1) > 0 && barycentric.get(2) > 0) {
+                    double seuil = -1e-3;
+
+                    if (barycentric.get(0) > seuil && barycentric.get(1) > seuil && barycentric.get(2) > seuil) {
 
                         Fragment v = new Fragment(x, y);
 
@@ -218,6 +220,7 @@ public class Rasterizer {
                             double att1 = v1.getAttribute(i);
                             double att2 = v2.getAttribute(i);
                             double att3 = v3.getAttribute(i);
+
                             v.setAttribute(i, alpha * att1 + beta * att2 + gamma * att3);
                         }
 

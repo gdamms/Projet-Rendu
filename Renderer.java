@@ -114,6 +114,8 @@ public class Renderer {
             Fragment v3 = fragments[faces[i + 2]];
 
             rasterizer.rasterizeFace(v1, v2, v3);
+
+            screen.swapBuffers();
         }
     }
 
