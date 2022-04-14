@@ -148,7 +148,7 @@ public class Renderer {
         /* wireframe rednering */
         renderWireframe();
         screen.swapBuffers();
-        wait(3);
+        wait(1);
 
         /* solid rendering, no lighting */
         // screen.clearBuffer();
@@ -163,7 +163,7 @@ public class Renderer {
         setLightingEnabled(true);
         renderSolid();
         screen.swapBuffers();
-        wait(300);
+        wait(3);
 
         /* solid rendering, with texture */
         /*

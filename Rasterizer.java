@@ -196,9 +196,14 @@ public class Rasterizer {
             Matrix C = makeBarycentricCoordsMatrix(v1, v2, v3);
 
             /* iterate over the triangle's bounding box */
+            int x_min = Math.min(Math.min(v1.getX(), v2.getX()), v3.getX());
+            int y_min = Math.min(Math.min(v1.getY(), v2.getY()), v3.getY());
 
-            for (int x = 0; x < shader.screen.getWidth(); x++) {
-                for (int y = 0; y < shader.screen.getHeight(); y++) {
+            int x_max = Math.max(Math.max(v1.getX(), v2.getX()), v3.getX());
+            int y_max = Math.max(Math.max(v1.getY(), v2.getY()), v3.getY());
+
+            for (int x = x_min; x < x_max + 1; x++) {
+                for (int y = y_min; y < y_max + 1; y++) {
                     Vector coords = new Vector(3);
                     coords.set(0, 1);
                     coords.set(1, x);
