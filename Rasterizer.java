@@ -217,7 +217,7 @@ public class Rasterizer {
 
                     double seuil = -1e-3;
 
-                    if (barycentric.get(0) > seuil && barycentric.get(1) > seuil && barycentric.get(2) > seuil) {
+                    if (barycentric.get(0) >= seuil && barycentric.get(1) >= seuil && barycentric.get(2) >= seuil) {
 
                         Fragment v = new Fragment(x, y);
 

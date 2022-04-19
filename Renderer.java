@@ -25,8 +25,8 @@ public class Renderer {
         screen.clearBuffer();
         // shader = new SimpleShader(screen);
         shader = new PainterShader(screen);
-        // rasterizer = new PerspectiveCorrectRasterizer (shader);
-        rasterizer = new Rasterizer(shader);
+        // rasterizer = new Rasterizer(shader);
+        rasterizer = new PerspectiveCorrectRasterizer(shader);
 
         xform = new Transformation();
         xform.setLookAt(scene.getCameraPosition(),
@@ -114,8 +114,6 @@ public class Renderer {
             Fragment v3 = fragments[faces[i + 2]];
 
             rasterizer.rasterizeFace(v1, v2, v3);
-
-            screen.swapBuffers();
         }
     }
 
@@ -166,17 +164,15 @@ public class Renderer {
         wait(3);
 
         /* solid rendering, with texture */
-        /*
-         * screen.clearBuffer ();
-         * TextureShader texShader = new TextureShader (screen);
-         * texShader.setTexture ("data/brick.jpg");
-         * shader = texShader;
-         * rasterizer.setShader (texShader);
-         * setLightingEnabled (true);
-         * renderSolid ();
-         * screen.swapBuffers ();
-         * wait (3);
-         */
+        // screen.clearBuffer();
+        // TextureShader texShader = new TextureShader(screen);
+        // texShader.setTexture("data/brick.jpg");
+        // shader = texShader;
+        // rasterizer.setShader(texShader);
+        // setLightingEnabled(true);
+        // renderSolid();
+        // screen.swapBuffers();
+        // wait(3);
 
         screen.destroy();
         System.exit(0);

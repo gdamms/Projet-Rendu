@@ -14,23 +14,25 @@ public class Texture {
 
     /**
      * Constructs a new Texture with the content of the image at @path.
-     */ 
-    public Texture (String path) throws Exception {
-        image = ImageIO.read (new File (path));
-        width = image.getWidth ();
-        height = image.getHeight ();
+     */
+    public Texture(String path) throws Exception {
+        image = ImageIO.read(new File(path));
+        width = image.getWidth();
+        height = image.getHeight();
     }
 
     /**
-     * Samples the texture at texture coordinates (u,v), using nearest neighboor interpolation
+     * Samples the texture at texture coordinates (u,v), using nearest neighboor
+     * interpolation
      * u and v and wrapped around to [0,1].
-     */ 
-    public Color sample (double u, double v) {
+     */
+    public Color sample(double u, double v) {
 
+        int x = (int) Math.floor((u * width)) % width;
+        int y = (int) Math.floor((v * height)) % height;
 
-	/* A COMPLETER */
+        int clr = image.getRGB(x, y);
 
-
-        return new Color (0,0,0);
+        return new Color(clr, false);
     }
 }
