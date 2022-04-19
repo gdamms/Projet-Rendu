@@ -17,6 +17,7 @@ public class Renderer {
     static Transformation xform;
     static Lighting lighting;
     static boolean lightingEnabled;
+    static boolean thong;
 
     static void init(String sceneFilename) throws Exception {
         scene = new Scene(sceneFilename);
@@ -25,8 +26,8 @@ public class Renderer {
         screen.clearBuffer();
         // shader = new SimpleShader(screen);
         shader = new PainterShader(screen);
-        // rasterizer = new Rasterizer(shader);
-        rasterizer = new PerspectiveCorrectRasterizer(shader);
+        rasterizer = new Rasterizer(shader);
+        // rasterizer = new PerspectiveCorrectRasterizer(shader);
 
         xform = new Transformation();
         xform.setLookAt(scene.getCameraPosition(),
@@ -66,7 +67,7 @@ public class Renderer {
                     fragments[i].setAttribute(8, texCoords[2 * i + 1]);
                 }
 
-                if (!lightingEnabled) {
+                if (!lightingEnabled || thong) {
                     fragments[i].setColor(colors[3 * i], colors[3 * i + 1], colors[3 * i + 2]);
                 } else {
                     double[] color = new double[3];
@@ -121,6 +122,10 @@ public class Renderer {
         lightingEnabled = enabled;
     }
 
+    public static void setThongEnabled(boolean enabled) {
+        thong = enabled;
+    }
+
     public static void wait(int sec) {
         try {
             Thread.sleep(sec * 1000);
@@ -144,21 +149,30 @@ public class Renderer {
         }
 
         /* wireframe rednering */
-        renderWireframe();
-        screen.swapBuffers();
-        wait(1);
+        // renderWireframe();
+        // screen.swapBuffers();
+        // wait(1);
 
         /* solid rendering, no lighting */
-        // screen.clearBuffer();
-        // shader.reset();
-        // renderSolid();
-        // screen.swapBuffers();
-        // wait(3);
+        screen.clearBuffer();
+        shader.reset();
+        renderSolid();
+        screen.swapBuffers();
+        wait(1);
 
         /* solid rendering, with lighting */
         screen.clearBuffer();
         shader.reset();
         setLightingEnabled(true);
+        setThongEnabled(false);
+        renderSolid();
+        screen.swapBuffers();
+        wait(3);
+
+        screen.clearBuffer();
+        shader.reset();
+        setLightingEnabled(true);
+        setThongEnabled(true);
         renderSolid();
         screen.swapBuffers();
         wait(3);
