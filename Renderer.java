@@ -39,7 +39,10 @@ public class Renderer {
         lighting = new Lighting();
         lighting.addAmbientLight(scene.getAmbientI());
         double[] lightCoord = scene.getSourceCoord();
-        lighting.addPointLight(lightCoord[0], lightCoord[1], lightCoord[2], scene.getSourceI());
+        lighting.addPointLight(lightCoord[0], lightCoord[1], lightCoord[2],
+                scene.getSourceI());
+        // lighting.addPointLight(10, 0, 0,
+        // scene.getSourceI());
     }
 
     static Fragment[] projectVertices() {
@@ -60,6 +63,7 @@ public class Renderer {
                 fragments[i] = new Fragment(x, y);
                 fragments[i].setDepth(pVertex.get(2));
                 fragments[i].setNormal(pNormal);
+                fragments[i].setPosition3(vertices[i]);
 
                 double[] texCoords = mesh.getTextureCoordinates();
                 if (texCoords != null) {

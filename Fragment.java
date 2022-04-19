@@ -91,6 +91,12 @@ public class Fragment {
         this.y = y;
     }
 
+    public void setPosition3(Vector pos) {
+        attributes[9] = pos.get(0);
+        attributes[10] = pos.get(1);
+        attributes[11] = pos.get(2);
+    }
+
     public double getDepth() {
         return attributes[0];
     }
