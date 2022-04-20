@@ -19,6 +19,8 @@ public class Renderer {
     static boolean lightingEnabled;
     static boolean thong;
 
+    static double theta;
+
     static void init(String sceneFilename) throws Exception {
         scene = new Scene(sceneFilename);
         mesh = new Mesh(scene.getMeshFileName());
@@ -39,10 +41,8 @@ public class Renderer {
         lighting = new Lighting();
         lighting.addAmbientLight(scene.getAmbientI());
         double[] lightCoord = scene.getSourceCoord();
-        lighting.addPointLight(lightCoord[0], lightCoord[1], lightCoord[2],
-                scene.getSourceI());
-        // lighting.addPointLight(10, 0, 0,
-        // scene.getSourceI());
+        lighting.addPointLight(lightCoord[0], lightCoord[1], lightCoord[2], scene.getSourceI());
+        // lighting.addPointLight(10, 0, 0, scene.getSourceI());
     }
 
     static Fragment[] projectVertices() {
@@ -130,9 +130,9 @@ public class Renderer {
         thong = enabled;
     }
 
-    public static void wait(int sec) {
+    public static void wait(int msec) {
         try {
-            Thread.sleep(sec * 1000);
+            Thread.sleep(msec);
         } catch (Exception e) {
             /* nothing */
         }
@@ -155,14 +155,14 @@ public class Renderer {
         /* wireframe rednering */
         // renderWireframe();
         // screen.swapBuffers();
-        // wait(1);
+        // wait(1000);
 
         /* solid rendering, no lighting */
-        screen.clearBuffer();
-        shader.reset();
-        renderSolid();
-        screen.swapBuffers();
-        wait(1);
+        // screen.clearBuffer();
+        // shader.reset();
+        // renderSolid();
+        // screen.swapBuffers();
+        // wait(1000);
 
         /* solid rendering, with lighting */
         screen.clearBuffer();
@@ -171,15 +171,37 @@ public class Renderer {
         setThongEnabled(false);
         renderSolid();
         screen.swapBuffers();
-        wait(3);
+        wait(3000);
 
+        /* solid rendering, with lighting (thong) */
+        scene.setCameraPosition(new Vector3(-2.0, 6.0, 8.0));
         screen.clearBuffer();
         shader.reset();
         setLightingEnabled(true);
         setThongEnabled(true);
         renderSolid();
         screen.swapBuffers();
-        wait(3);
+        wait(3000);
+
+        for (int it = 0; it < 100; it++) {
+            /* solid rendering, with lighting */
+            screen.clearBuffer();
+            shader.reset();
+            setLightingEnabled(true);
+            setThongEnabled(false);
+            renderSolid();
+            screen.swapBuffers();
+            wait(30);
+
+            /* solid rendering, with lighting (thong) */
+            screen.clearBuffer();
+            shader.reset();
+            setLightingEnabled(true);
+            setThongEnabled(true);
+            renderSolid();
+            screen.swapBuffers();
+            wait(30);
+        }
 
         /* solid rendering, with texture */
         // screen.clearBuffer();
@@ -190,7 +212,33 @@ public class Renderer {
         // setLightingEnabled(true);
         // renderSolid();
         // screen.swapBuffers();
-        // wait(3);
+        // wait(3000);
+
+        // theta = 0;
+        // boolean running = true;
+        // while (running) {
+        // scene.setCameraPosition(new Vector3(8 * Math.cos(theta), 2, 8 *
+        // Math.sin(theta)));
+
+        // xform.setLookAt(
+        // scene.getCameraPosition(),
+        // scene.getCameraLookAt(),
+        // scene.getCameraUp());
+        // xform.setProjection();
+        // xform.setCalibration(scene.getCameraFocal(), scene.getScreenW(),
+        // scene.getScreenH());
+
+        // screen.clearBuffer();
+        // shader.reset();
+        // setLightingEnabled(true);
+        // setThongEnabled(true);
+        // renderSolid();
+        // screen.swapBuffers();
+
+        // wait(20);
+
+        // theta += 0.1;
+        // }
 
         screen.destroy();
         System.exit(0);
