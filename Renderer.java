@@ -153,16 +153,16 @@ public class Renderer {
         }
 
         /* wireframe rednering */
-        // renderWireframe();
-        // screen.swapBuffers();
-        // wait(1000);
+        renderWireframe();
+        screen.swapBuffers();
+        wait(3000);
 
         /* solid rendering, no lighting */
-        // screen.clearBuffer();
-        // shader.reset();
-        // renderSolid();
-        // screen.swapBuffers();
-        // wait(1000);
+        screen.clearBuffer();
+        shader.reset();
+        renderSolid();
+        screen.swapBuffers();
+        wait(3000);
 
         /* solid rendering, with lighting */
         screen.clearBuffer();
@@ -174,7 +174,6 @@ public class Renderer {
         wait(3000);
 
         /* solid rendering, with lighting (thong) */
-        scene.setCameraPosition(new Vector3(-2.0, 6.0, 8.0));
         screen.clearBuffer();
         shader.reset();
         setLightingEnabled(true);

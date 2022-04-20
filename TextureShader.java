@@ -41,9 +41,6 @@ public class TextureShader extends Shader {
                 double[] uv = fragment.getAttribute(7, 2);
                 Color clr = texture.sample(uv[0], uv[1]);
 
-                // System.out.println("\n\nu : " + uv[0] + " v : " + uv[1] + " clr : " + clr);
-
-                // System.out.println("color1 : " + fragment.getColor());
                 fragment.setColor(clr);
 
                 screen.setPixel(fragment.getX(), fragment.getY(), clr);
